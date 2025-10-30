@@ -10,12 +10,6 @@ class DatabaseSettings(BaseSettings):
     POSTGRES_HOST: str = "database"
     ENGINE: str = "postgresql"
 
-    MONGO_USER: str = "mongo"
-    MONGO_PASSWORD: SecretStr = Field(...)
-    MONGO_DB: str = "mongo"
-    MONGO_HOST: str = "mongodb"
-    MONGO_PORT: int = 27017
-
     @property
     def url_template(self) -> str:
         return "{engine}://{user}:{password}@{host}:{port}/{database}"
@@ -40,17 +34,6 @@ class DatabaseSettings(BaseSettings):
             host=self.POSTGRES_HOST,
             port=self.POSTGRES_PORT,
             database=self.POSTGRES_DB,
-        )
-
-    @property
-    def mongo_url(self) -> str:
-        return self.url_template.format(
-            engine="mongodb",
-            user=self.MONGO_USER,
-            password=self.MONGO_PASSWORD.get_secret_value(),
-            host=self.MONGO_HOST,
-            port=self.MONGO_PORT,
-            database=self.MONGO_DB,
         )
 
 

@@ -48,7 +48,7 @@ async def list_by_occupation(
     occupation_id: int,
     organization_service: OrganizationServiceDependency,
     include_children: Annotated[bool, Query(alias="includeChildren")] = True,
-    max_depth: Annotated[int | None, Query(alias="maxDepth", ge=1, le=10)] = None,
+    max_depth: Annotated[int | None, Query(alias="maxDepth", ge=1, le=3)] = None,
 ) -> list[OrganizationResponseSchema]:
     if include_children:
         return await organization_service.list_by_occupation_tree(

@@ -4,7 +4,6 @@ services:
     image: backend:latest
     build: {context: ., dockerfile: docker/backend/Dockerfile}
     restart: unless-stopped
-    command: [ 'alembic', 'upgrade', 'head' ]
     volumes:
       - static-files:/backend/static
     ports:

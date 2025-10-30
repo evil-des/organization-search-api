@@ -2,17 +2,9 @@
 
 ## Запуск
 - Создайте файл `.env` (в корне)
-- Соберите контейнер и подготовьте зависимости:
+- Запустите сервисы (бекенд автоматически выполнит миграции и наполнит БД тестовыми данными при первом старте):
   ```bash
-  docker compose build backend
-  ```
-- Примените миграции:
-  ```bash
-  docker compose run --rm backend alembic upgrade head
-  ```
-- Запустите сервисы (бекенд и базу):
-  ```bash
-  docker compose up backend
+  docker compose up --build
   ```
 
 ## Работа с API

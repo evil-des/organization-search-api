@@ -20,5 +20,7 @@ RUN pip install --no-cache-dir /wheels/*.whl
 RUN rm -rf /wheels
 
 COPY . .
+COPY docker/backend/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
-ENTRYPOINT ["python", "-m", "app"]
+ENTRYPOINT ["/entrypoint.sh"]
