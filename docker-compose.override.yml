@@ -1,0 +1,6 @@
+services:
+  backend:
+    command: [ ]
+    volumes:
+      - ./app:/backend/app
+      - ./migrations/versions:/backend/migrations/versions

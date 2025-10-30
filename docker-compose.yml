@@ -1,0 +1,27 @@
+services:
+  backend:
+    env_file: .env
+    image: backend:latest
+    build: {context: ., dockerfile: docker/backend/Dockerfile}
+    restart: unless-stopped
+    command: [ 'alembic', 'upgrade', 'head' ]
+    volumes:
+      - static-files:/backend/static
+    ports:
+      - ${BACKEND_PORT}:${BACKEND_PORT}
+    depends_on:
+      - database
+
+  database:
+    env_file: .env
+    environment:
+      - PGPORT=${POSTGRES_PORT}
+    image: postgres:16.4-alpine3.20
+    ports:
+      - ${POSTGRES_PORT}:${POSTGRES_PORT}
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+volumes:
+  static-files:
+  db-data:
